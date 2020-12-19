@@ -1,6 +1,6 @@
 # Hina bot
 <div align="center">
-  <img src="https://i.pinimg.com/originals/1a/43/16/1a431651fb17aaeabad9055a8e183d3a.jpg" alt="" width="500px" height="500px"/>
+  <img src="https://i.pinimg.com/originals/1a/43/16/1a431651fb17aaeabad9055a8e183d3a.jpg" alt="hina"/>
 </div>
 Telegram bot made with love. Uses nekos.py API, random.cat API, random dog page.
 
