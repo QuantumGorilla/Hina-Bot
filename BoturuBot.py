@@ -12,7 +12,7 @@ logger = logging.getLogger()
 
 #Ask Token
 TOKEN = os.getenv("TOKEN")
-mode = os.getevn("MODE")
+mode = os.getenv("MODE")
 
 if mode == "dev":
     def run(updater):
@@ -88,6 +88,7 @@ def main():
     dp.add_handler(CommandHandler('doggo', doggo))
     dp.add_handler(CommandHandler('neko', neko))
     dp.add_handler(CommandHandler('hentai', hentai))
-
+    run(updater)
+    
 if __name__ == '__main__':
     main()
