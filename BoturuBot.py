@@ -106,7 +106,7 @@ def baka(update, context):
         context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))
     
 def hey(update, context):
-    context.bot.send_video(chat_id=update.message.chat_id, video=open('./media/hey.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.message.chat_id, video=open('./media/Hey.mp4', 'rb'), supports_streaming=True)
 
 def navidad(update, context):
     update.message.reply_text('Feliz navidad, s-senpai! uwu')
