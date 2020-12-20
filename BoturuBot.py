@@ -39,7 +39,8 @@ def help(update, context):
                               \n /pat - uwu
                               \n /baka - Baka >_<
                               \n /hey - Hey, loco, que pasa valemia
-                              \n /navidad - la navidad es todo aquello 
+                              \n /navidad - la navidad es todo aquello
+                              \n /quien - Quién monda es Dorian?  
                               """)
 
 def get_url(identifier):
@@ -110,9 +111,13 @@ def hey(update, context):
 def navidad(update, context):
     update.message.reply_text('Feliz navidad, s-senpai! uwu')
     context.bot.send_audio(chat_id=update.message.chat_id, audio=open('./media/Navidad.mp3', 'rb'))
+
+def quien(update, context):
+    context.bot.send_message(chat_id=update.message.chat_id, text='Quién?')
+    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('media/Quien.mp3', 'rb'))
+    
 def main():
-    Boturu = telegram.Bot(token = TOKEN)
-    updater = Updater(Boturu.token, use_context=True)
+    updater = Updater(token='1448142051:AAFDeQbHRzE9vsDmpmUyk6ye_r5c-Fezf7c', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('help', help))
     dp.add_handler(CommandHandler('doggo', doggo))
@@ -123,7 +128,9 @@ def main():
     dp.add_handler(CommandHandler('baka', baka))
     dp.add_handler(CommandHandler('hey', hey))
     dp.add_handler(CommandHandler('navidad', navidad))
-    run(updater)
+    dp.add_handler(CommandHandler('quien', quien))
+    updater.start_polling()
+    updater.idle()
     
 if __name__ == '__main__':
     main()

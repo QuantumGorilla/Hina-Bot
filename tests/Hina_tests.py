@@ -12,7 +12,8 @@ def help(update, context):
                               \n /pat - uwu
                               \n /baka - Baka >_<
                               \n /hey - Hey, loco, que pasa valemia
-                              \n /navidad - la navidad es todo aquello 
+                              \n /navidad - la navidad es todo aquello
+                              \n /quien - Quién monda es Dorian?  
                               """)
 
 def get_url(identifier):
@@ -77,11 +78,15 @@ def baka(update, context):
         context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))
     
 def hey(update, context):
-    context.bot.send_video(chat_id=update.message.chat_id, video=open('hey.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.message.chat_id, video=open('media/Hey.mp4', 'rb'), supports_streaming=True)
 
 def navidad(update, context):
     update.message.reply_text('Feliz navidad, s-senpai! uwu')
-    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('Navidad.mp3', 'rb'))
+    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('media/Navidad.mp3', 'rb'))
+    
+def quien(update, context):
+    context.bot.send_message(chat_id=update.message.chat_id, text='Quién?')
+    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('media/Quien.mp3', 'rb'))
     
 def main():
     updater = Updater(token='TOKEN', use_context=True)
@@ -95,6 +100,7 @@ def main():
     dp.add_handler(CommandHandler('baka', baka))
     dp.add_handler(CommandHandler('hey', hey))
     dp.add_handler(CommandHandler('navidad', navidad))
+    dp.add_handler(CommandHandler('quien', quien))
     updater.start_polling()
     updater.idle()
     
