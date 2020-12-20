@@ -130,7 +130,7 @@ def main():
     dp.add_handler(CommandHandler('hey', hey))
     dp.add_handler(CommandHandler('navidad', navidad))
     dp.add_handler(CommandHandler('quien', quien))
-    updater.run()
+    run(updater)
     
 if __name__ == '__main__':
     main()
