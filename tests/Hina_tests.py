@@ -1,32 +1,5 @@
-import logging, os, telegram
 from telegram.ext import Updater, CommandHandler
 import nekos, requests, re, random, sys
-
-#Config logging
-
-logging.basicConfig(
-    level = logging.INFO, format="%(asctime) - %(name)s - %(levelname)s - %(message)s,"
-)
-
-logger = logging.getLogger()
-
-#Ask Token
-TOKEN = os.getenv("TOKEN")
-mode = os.getenv("MODE")
-
-if mode == "dev":
-    def run(updater):
-        updater.start_polling()
-        updater.idle()
-elif mode == "prod":
-    def run(updater):
-        PORT = int(os.environ.get("PORT","8443"))
-        HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
-        updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
-        updater.bot.set_webhook(f"https://{HEROKU_APP_NAME}.herokuapp.com/{TOKEN}")
-else:
-    logger.info('Mode not specified.')
-    sys.exit()
 
 def help(update, context):
     update.message.reply_text("""
@@ -80,7 +53,6 @@ def random_target():
                 'random_hentai_gif', 'smallboobs', 'ero']
     return random.choice(possible)
 
-
 def hentai(update, context):
     context.bot.send_photo(
         chat_id=update.effective_chat.id, photo=nekos.img(random_target()))
@@ -105,14 +77,14 @@ def baka(update, context):
         context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))
     
 def hey(update, context):
-    context.bot.send_video(chat_id=update.message.chat_id, video=open('./media/hey.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.message.chat_id, video=open('hey.mp4', 'rb'), supports_streaming=True)
 
 def navidad(update, context):
     update.message.reply_text('Feliz navidad, s-senpai! uwu')
-    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('./media/Navidad.mp3', 'rb'))
+    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('Navidad.mp3', 'rb'))
+    
 def main():
-    Boturu = telegram.Bot(token = TOKEN)
-    updater = Updater(Boturu.token, use_context=True)
+    updater = Updater(token='TOKEN', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('help', help))
     dp.add_handler(CommandHandler('doggo', doggo))
@@ -123,7 +95,8 @@ def main():
     dp.add_handler(CommandHandler('baka', baka))
     dp.add_handler(CommandHandler('hey', hey))
     dp.add_handler(CommandHandler('navidad', navidad))
-    run(updater)
+    updater.start_polling()
+    updater.idle()
     
 if __name__ == '__main__':
     main()
