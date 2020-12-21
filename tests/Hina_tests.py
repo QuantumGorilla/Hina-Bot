@@ -1,5 +1,5 @@
 from telegram.ext import Updater, CommandHandler
-import nekos, requests, re, random, sys
+import nekos, requests, re, random, os
 
 def help(update, context):
     update.message.reply_text("""
@@ -87,6 +87,10 @@ def navidad(update, context):
 def quien(update, context):
     context.bot.send_message(chat_id=update.message.chat_id, text='Quién?')
     context.bot.send_audio(chat_id=update.message.chat_id, audio=open('media/Quien.mp3', 'rb'))
+
+def buenosdias(update,context):
+    file = random.choice(os.listdir('media/chayanne'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/chayanne/'+file, 'rb'))
     
 def main():
     updater = Updater(token='TOKEN', use_context=True)
@@ -101,6 +105,7 @@ def main():
     dp.add_handler(CommandHandler('hey', hey))
     dp.add_handler(CommandHandler('navidad', navidad))
     dp.add_handler(CommandHandler('quien', quien))
+    dp.add_handler(CommandHandler('buendia', buenosdias))
     updater.start_polling()
     updater.idle()
     
