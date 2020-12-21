@@ -92,6 +92,10 @@ def buenosdias(update,context):
     file = random.choice(os.listdir('media/chayanne'))
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/chayanne/'+file, 'rb'))
     
+def buenasnoches(update, context):
+    file = random.choice(os.listdir('media/buenas_noches'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/buenas_noches/'+file, 'rb'))
+    
 def main():
     updater = Updater(token='TOKEN', use_context=True)
     dp = updater.dispatcher
@@ -105,7 +109,8 @@ def main():
     dp.add_handler(CommandHandler('hey', hey))
     dp.add_handler(CommandHandler('navidad', navidad))
     dp.add_handler(CommandHandler('quien', quien))
-    dp.add_handler(CommandHandler('buendia', buenosdias))
+    dp.add_handler(CommandHandler('buenosdias', buenosdias))
+    dp.add_handler(CommandHandler('buenasnoches', buenasnoches))
     updater.start_polling()
     updater.idle()
     
