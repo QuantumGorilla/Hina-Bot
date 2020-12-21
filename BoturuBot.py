@@ -40,7 +40,9 @@ def help(update, context):
                               \n /baka - Baka >_<
                               \n /hey - Hey, loco, que pasa valemia
                               \n /navidad - la navidad es todo aquello
-                              \n /quien - Quién monda es Dorian?  
+                              \n /quien - Quién monda es Dorian?
+                              \n /buenosdias - Ohayo, darin! (Chayanne)
+                              \n /buenasnoches - Piolin te desea buenas noches
                               """)
 
 def get_url(identifier):
@@ -115,7 +117,15 @@ def navidad(update, context):
 def quien(update, context):
     context.bot.send_message(chat_id=update.message.chat_id, text='Quién?')
     context.bot.send_audio(chat_id=update.message.chat_id, audio=open('media/Quien.mp3', 'rb'))
+
+def buenosdias(update,context):
+    file = random.choice(os.listdir('media/chayanne'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/chayanne/'+file, 'rb'))
     
+def buenasnoches(update, context):
+    file = random.choice(os.listdir('media/buenas_noches'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/buenas_noches/'+file, 'rb'))
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -130,6 +140,8 @@ def main():
     dp.add_handler(CommandHandler('hey', hey))
     dp.add_handler(CommandHandler('navidad', navidad))
     dp.add_handler(CommandHandler('quien', quien))
+    dp.add_handler(CommandHandler('buenosdias', buenosdias))
+    dp.add_handler(CommandHandler('buenasnoches', buenasnoches))
     run(updater)
     
 if __name__ == '__main__':
