@@ -117,8 +117,7 @@ def quien(update, context):
     context.bot.send_audio(chat_id=update.message.chat_id, audio=open('media/Quien.mp3', 'rb'))
     
 def main():
-    Boturu = telegram.Bot(token = TOKEN)
-    updater = Updater(Boturu.token, use_context=True)
+    updater = Updater(token='1448142051:AAFDeQbHRzE9vsDmpmUyk6ye_r5c-Fezf7c', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('help', help))
     dp.add_handler(CommandHandler('doggo', doggo))
