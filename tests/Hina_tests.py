@@ -96,7 +96,6 @@ def main():
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('help', help))
     dp.add_handler(CommandHandler('despegala', despegala))
-    dp.add_handler(CommandHandler('baka', baka))
     updater.start_polling()
     updater.idle()
     
