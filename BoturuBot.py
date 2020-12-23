@@ -113,7 +113,10 @@ def buenosdias(update,context):
 def buenasnoches(update, context):
     file = random.choice(os.listdir('media/buenas_noches'))
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/buenas_noches/'+file, 'rb'))
-    
+
+def princesas(update, context):    
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Princesas.mp4', 'rb'), supports_streaming=True)
+
 def noticias(update, context):
     file = random.choice(os.listdir('media/noticias'))
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/noticias/'+file, 'rb'))
@@ -142,6 +145,7 @@ def main():
     dp.add_handler(CommandHandler('quien', quien))
     dp.add_handler(CommandHandler('buenosdias', buenosdias))
     dp.add_handler(CommandHandler('buenasnoches', buenasnoches))
+    dp.add_handler(CommandHandler('princesas', princesas))
     dp.add_handler(CommandHandler('noticias', noticias))
     dp.add_handler(CommandHandler('despegala', despegala))
     run(updater)
