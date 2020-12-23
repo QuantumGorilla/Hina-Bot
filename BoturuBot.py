@@ -29,8 +29,8 @@ else:
     sys.exit()
 
 def help(update, context):
-    update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NFSW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria
+     update.message.reply_text("""
+                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NFSW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón
                               """)
 
 def get_url(identifier):
@@ -96,15 +96,15 @@ def baka(update, context):
         context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))
     
 def hey(update, context):
-    context.bot.send_video(chat_id=update.message.chat_id, video=open('./media/Hey.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Hey.mp4', 'rb'), supports_streaming=True)
 
 def navidad(update, context):
     update.message.reply_text('Feliz navidad, s-senpai! uwu')
-    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('./media/Navidad.mp3', 'rb'))
+    context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('./media/Navidad.mp3', 'rb'))
 
 def quien(update, context):
-    context.bot.send_message(chat_id=update.message.chat_id, text='Quién?')
-    context.bot.send_audio(chat_id=update.message.chat_id, audio=open('media/Quien.mp3', 'rb'))
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Quién?')
+    context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('media/Quien.mp3', 'rb'))
 
 def buenosdias(update,context):
     file = random.choice(os.listdir('media/chayanne'))
@@ -113,9 +113,18 @@ def buenosdias(update,context):
 def buenasnoches(update, context):
     file = random.choice(os.listdir('media/buenas_noches'))
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/buenas_noches/'+file, 'rb'))
-
-def princesas(update, context):
-    context.bot.send_video(chat_id=update.message.chat_id, video=open('media/Princesas.mp4', 'rb'), supports_streaming=True)
+    
+def noticias(update, context):
+    file = random.choice(os.listdir('media/noticias'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/noticias/'+file, 'rb'))
+    
+def despegala(update, context):
+    try:    
+        user = update.message.reply_to_message
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Omae wa mou... Shindeiru')
+        context.bot.kickChatMember(chat_id=update.effective_chat.id, user_id=user.from_user['id'])
+    except:
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Hpta, el cv es admin')
 
 def main():
     Boturu = telegram.Bot(token = TOKEN)
@@ -133,7 +142,8 @@ def main():
     dp.add_handler(CommandHandler('quien', quien))
     dp.add_handler(CommandHandler('buenosdias', buenosdias))
     dp.add_handler(CommandHandler('buenasnoches', buenasnoches))
-    dp.add_handler(CommandHandler('princesas', princesas))
+    dp.add_handler(CommandHandler('noticias', noticias))
+    dp.add_handler(CommandHandler('despegala', despegala))
     run(updater)
     
 if __name__ == '__main__':
