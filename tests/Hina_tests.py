@@ -31,7 +31,7 @@ def butifarra(update, context):
     
 
 def main():
-    updater = Updater(token='1448142051:AAHd_Px_QPoFwdb3Z0uG9kv26B9g_q7IPW0', use_context=True)
+    updater = Updater(token='TOKEN', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('metienesque', butifarra))
     dp.add_handler(CommandHandler('despegala', despegala))

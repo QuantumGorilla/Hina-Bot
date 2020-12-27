@@ -30,7 +30,7 @@ else:
 
 def help(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NFSW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón
+                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NFSW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear
                               """)
 
 def get_url(identifier):
@@ -124,10 +124,31 @@ def noticias(update, context):
 def despegala(update, context):
     try:    
         user = update.message.reply_to_message
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Omae wa mou... Shindeiru')
-        context.bot.kickChatMember(chat_id=update.effective_chat.id, user_id=user.from_user['id'])
+        if user != None:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Omae wa mou... Shindeiru')
+            context.bot.kickChatMember(chat_id=update.effective_chat.id, user_id=user.from_user['id'])
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='No mandaste a despegarla a nadie, cachón')
     except:
         context.bot.send_message(chat_id=update.effective_chat.id, text='Hpta, el cv es admin')
+
+def butifarra(update, context):
+    user = update.message.reply_to_message
+    print(user)
+    if user == None:
+        if len(context.args) != 0:
+            word = ' '   
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + word.join(context.args))
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+        else:
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+    else:
+        if user.from_user['username'] == None:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + user.from_user['first_name'])
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + user.from_user['first_name'] + ' ' + '( @' + user.from_user['username']+')')        
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
 
 def main():
     Boturu = telegram.Bot(token = TOKEN)
@@ -148,6 +169,7 @@ def main():
     dp.add_handler(CommandHandler('princesas', princesas))
     dp.add_handler(CommandHandler('noticias', noticias))
     dp.add_handler(CommandHandler('despegala', despegala))
+    dp.add_handler(CommandHandler('metienesque', butifarra))
     run(updater)
     
 if __name__ == '__main__':
