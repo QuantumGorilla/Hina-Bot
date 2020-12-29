@@ -172,7 +172,7 @@ def comedia(update, context):
     reply_user = update.message.reply_to_message
     file = random.choice(os.listdir('media/comedia'))
     if reply_user == None:
-        if len(context.args) == 0:
+        if len(context.args) != 0:
             word = ' '
             context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta,  ' + word.join(context.args) + ', cv')
             context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/comedia/'+file, 'rb'))
