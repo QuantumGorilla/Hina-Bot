@@ -1,40 +1,46 @@
 from telegram.ext import Updater, CommandHandler
+import nekos
 
-def despegala(update, context):
-    try:    
-        user = update.message.reply_to_message
-        if user != None:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Omae wa mou... Shindeiru')
-            context.bot.kickChatMember(chat_id=update.effective_chat.id, user_id=user.from_user['id'])
-        else:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='No mandaste a despegarla a nadie, cachón')
-    except:
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Hpta, el cv es admin')
-
-def butifarra(update, context):
-    user = update.message.reply_to_message
-    print(user)
-    if user == None:
+def pat(update, context):
+    reply_user = update.message.reply_to_message
+    user = update.message.from_user
+    if reply_user == None:
         if len(context.args) != 0:
-            word = ' '   
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + word.join(context.args))
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+            word = ' '
+            context.bot.send_message(chat_id=update.effective_chat.id, text='@' + user['username'] + ' is patting ' + word.join(context.args) + ' uwu')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('pat'))
         else:
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('pat'))
     else:
-        if user.from_user['username'] == None:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + user.from_user['first_name'])
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+        if reply_user.from_user['username'] == None:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='@' + user['username'] + ' is patting ' + reply_user.from_user['first_name'] + ' uwu')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('pat'))
         else:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + user.from_user['first_name'] + ' ' + '( @' + user.from_user['username']+')')        
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
-    
+            context.bot.send_message(chat_id=update.effective_chat.id, text='@' + user['username'] + ' is patting ' + reply_user.from_user['first_name'] + ' ' + '(@'+ reply_user.from_user['username'] + ')' + ' uwu')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('pat'))
+
+def baka(update, context):
+    reply_user = update.message.reply_to_message
+    if reply_user == None:        
+        if len(context.args) != 0:
+            word = ' '
+            context.bot.send_message(chat_id=update.effective_chat.id, text='B-b-baka, ' + word.join(context.args) + ' ! >_<')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))
+        else:   
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))
+    else:
+        if reply_user.from_user['username'] == None:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='B-b-baka, ' + reply_user.from_user['first_name'] + ' ! >_<')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='B-b-baka, ' + reply_user.from_user['first_name'] + '(@' + reply_user.from_user['username'] + ')'+ ' ! >_<')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=nekos.img('baka'))    
 
 def main():
     updater = Updater(token='TOKEN', use_context=True)
     dp = updater.dispatcher
-    dp.add_handler(CommandHandler('metienesque', butifarra))
-    dp.add_handler(CommandHandler('despegala', despegala))
+    dp.add_handler(CommandHandler('pat', pat))
+    dp.add_handler(CommandHandler('baka', baka))
     updater.start_polling()
     updater.idle()
     
