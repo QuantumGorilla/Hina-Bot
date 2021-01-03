@@ -30,7 +30,7 @@ else:
 
 def help(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NFSW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media
+                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NFSW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die
                               """)
 
 def get_url(identifier):
@@ -186,6 +186,14 @@ def comedia(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta,  ' + reply_user.from_user['first_name'] + ' ' + '(@' + reply_user.from_user['username']+')' + ', cv')        
             context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/comedia/'+file, 'rb'))
 
+def mimir(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Hora de mimir! uwu')
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Mimir.mp4', 'rb'), supports_streaming=True)
+
+def die(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Solo quiero morir :(')
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Die.mp4', 'rb'), supports_streaming=True)
+    
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -207,6 +215,8 @@ def main():
     dp.add_handler(CommandHandler('despegala', despegala))
     dp.add_handler(CommandHandler('metienesque', butifarra))
     dp.add_handler(CommandHandler('comedia', comedia))
+    dp.add_handler(CommandHandler('mimir', mimir))
+    dp.add_handler(CommandHandler('die', die))
     run(updater)
     
 if __name__ == '__main__':
