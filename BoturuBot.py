@@ -68,7 +68,7 @@ def random_target():
                 'gecg', 'eroyuri', 'eron', 'cum_jpg', 'nsfw_neko_gif', 'solo', 'kemonomimi',
                 'nsfw_avatar', 'anal', 'erofeet', 'blowjob', 'pussy', 'tits', 'holoero', 'pussy_jpg',
                 'waifu', 'kiss', 'femdom', 'neko', 'spank', 'cuddle', 'erok', 'fox_girl', 'boobs',
-                'random_hentai_gif', 'smallboobs', 'ero']
+                'smallboobs', 'ero']
     return random.choice(possible)
 
 
@@ -123,29 +123,30 @@ def navidad(update, context):
 
 def quien(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Quién?')
-    context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('media/Quien.mp3', 'rb'))
+    context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('./media/Quien.mp4', 'rb'))
 
 def buenosdias(update,context):
     file = random.choice(os.listdir('media/chayanne'))
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/chayanne/'+file, 'rb'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/chayanne/'+file, 'rb'))
     
 def buenasnoches(update, context):
     file = random.choice(os.listdir('media/buenas_noches'))
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/buenas_noches/'+file, 'rb'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/buenas_noches/'+file, 'rb'))
 
 def princesas(update, context):    
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Princesas.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Princesas.mp4', 'rb'), supports_streaming=True)
 
 def noticias(update, context):
     file = random.choice(os.listdir('media/noticias'))
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/noticias/'+file, 'rb'))
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/noticias/'+file, 'rb'))
     
 def despegala(update, context):
     try:    
         reply_user = update.message.reply_to_message
         if reply_user != None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Omae wa mou... Shindeiru')
-            context.bot.kickChatMember(chat_id=update.effective_chat.id, user_id=reply_user.from_user['id'])
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/Shindeiru', 'rb'))
+            context.bot.kickChatMember(chat_id=update.effective_chat.id, user_id=reply_user.from_user['id'])            
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='No mandaste a despegarla a nadie, cachón')
     except:
@@ -157,16 +158,16 @@ def butifarra(update, context):
         if len(context.args) != 0:
             word = ' '   
             context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + word.join(context.args))
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Butifarra.mp4', 'rb'), supports_streaming=True)
         else:
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Butifarra.mp4', 'rb'), supports_streaming=True)
     else:
         if reply_user.from_user['username'] == None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + reply_user.from_user['first_name'])
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Butifarra.mp4', 'rb'), supports_streaming=True)
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Hey, ' + reply_user.from_user['first_name'] + ' ' + '(@' + reply_user.from_user['username']+')')        
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Butifarra.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Butifarra.mp4', 'rb'), supports_streaming=True)
 
 def comedia(update, context):
     reply_user = update.message.reply_to_message
@@ -174,25 +175,25 @@ def comedia(update, context):
     if reply_user == None:
         if len(context.args) != 0:
             word = ' '
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta,  ' + word.join(context.args) + ', cv')
-            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/comedia/'+file, 'rb'))
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta, ' + word.join(context.args) + ', cv')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/comedia/'+file, 'rb'))
         else:
-            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/comedia/'+file, 'rb'))
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/comedia/'+file, 'rb'))
     else:
         if reply_user.from_user['username'] == None:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta,  ' + reply_user.from_user['first_name'] + ', cv')
-            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/comedia/'+file, 'rb'))
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta, ' + reply_user.from_user['first_name'] + ', cv')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/comedia/'+file, 'rb'))
         else:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta,  ' + reply_user.from_user['first_name'] + ' ' + '(@' + reply_user.from_user['username']+')' + ', cv')        
-            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('media/comedia/'+file, 'rb'))
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Jajaja cule chiste hpta, ' + reply_user.from_user['first_name'] + ' ' + '(@' + reply_user.from_user['username']+')' + ', cv')        
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/comedia/'+file, 'rb'))
 
 def mimir(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Hora de mimir! uwu')
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Mimir.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Mimir.mp4', 'rb'), supports_streaming=True)
 
 def die(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Solo quiero morir :(')
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open('media/Die.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Die.mp4', 'rb'), supports_streaming=True)
     
 def main():
     Boturu = telegram.Bot(token = TOKEN)
