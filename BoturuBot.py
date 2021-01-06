@@ -58,7 +58,7 @@ def doggo(update, context):
     url = get_image_url(0)
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=url)
 
-def  neko(update, context):
+def neko(update, context):
     url = get_image_url(1)
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=url)
 
@@ -123,7 +123,7 @@ def navidad(update, context):
 
 def quien(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Quién?')
-    context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('./media/Quien.mp4', 'rb'))
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Quien.mp4', 'rb'), supports_streaming=True)
 
 def buenosdias(update,context):
     file = random.choice(os.listdir('media/chayanne'))
@@ -145,11 +145,12 @@ def despegala(update, context):
         reply_user = update.message.reply_to_message
         if reply_user != None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Omae wa mou... Shindeiru')
-            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/Shindeiru', 'rb'))
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/Shindeiru.png', 'rb'))
             context.bot.kickChatMember(chat_id=update.effective_chat.id, user_id=reply_user.from_user['id'])            
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='No mandaste a despegarla a nadie, cachón')
     except:
+        context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/Hina-fail-ban.jpg', 'rb'))
         context.bot.send_message(chat_id=update.effective_chat.id, text='Hpta, el cv es admin')
 
 def butifarra(update, context):
