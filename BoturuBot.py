@@ -28,9 +28,9 @@ else:
     logger.info('Mode not specified.')
     sys.exit()
 
-def help(update, context):
+def taskete(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete
+                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete
                               """)
 
 def get_url(identifier):
@@ -234,7 +234,7 @@ def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
     dp = updater.dispatcher
-    dp.add_handler(CommandHandler('help', help))
+    dp.add_handler(CommandHandler('taskete', taskete))
     dp.add_handler(CommandHandler('doggo', doggo))
     dp.add_handler(CommandHandler('neko', neko))
     dp.add_handler(CommandHandler('hentai', hentai))
