@@ -30,7 +30,7 @@ else:
 
 def help(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee
+                              Senpai, estos son los comandos u//u: \n /help - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete
                               """)
 
 def get_url(identifier):
@@ -213,6 +213,23 @@ def trece(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Uy, pah, LO DIJITEEEEEE ' + '(@' + reply_user.from_user['username'] + ')')
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Trece.mp4', 'rb'), supports_streaming=True)
 
+def respete(update, context):
+    reply_user = update.message.reply_to_message
+    if reply_user == None:
+        if len(context.args) != 0:
+            word = ' '
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Respeta, ' + word.join(context.args) + ', cachón')
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Respete.mp4', 'rb'), supports_streaming=True)
+        else:
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Respete.mp4', 'rb'), supports_streaming=True)
+    else:
+        if reply_user.from_user['username'] == None:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Respeta, ' + reply_user.from_user['first_name'] + ', cachón')
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Respete.mp4', 'rb'), supports_streaming=True)
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Respeta, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + '), cachón')
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Respete.mp4', 'rb'), supports_streaming=True)
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -237,6 +254,7 @@ def main():
     dp.add_handler(CommandHandler('mimir', mimir))
     dp.add_handler(CommandHandler('die', die))
     dp.add_handler(CommandHandler('uypah', trece))
+    dp.add_handler(CommandHandler('respete', respete))
     run(updater)
     
 if __name__ == '__main__':
