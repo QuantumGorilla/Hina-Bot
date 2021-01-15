@@ -16,7 +16,7 @@ def hentai(update, context):
         chat_id=update.effective_chat.id, photo=nekos.img(random_target()))
     
 def main():
-    updater = Updater(token='1448142051:AAFGjpOMeUn8Cat2pDIMKUAragLVgFkXaMQ', use_context=True)
+    updater = Updater(token='TOKEN', use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('hentai', hentai))
     updater.start_polling()

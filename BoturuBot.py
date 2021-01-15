@@ -64,13 +64,11 @@ def neko(update, context):
 
 def random_target():
     possible = ['feet', 'yuri', 'trap', 'futanari', 'hololewd', 'lewdkemo',
-                'cum', 'erokemo', 'les', 'lewdk', 'ngif', 'lewd', 'feed',
-                'gecg', 'eroyuri', 'eron', 'cum_jpg', 'nsfw_neko_gif', 'solo', 'kemonomimi',
-                'nsfw_avatar', 'anal', 'erofeet', 'blowjob', 'pussy', 'tits', 'holoero', 'pussy_jpg',
-                'waifu', 'kiss', 'femdom', 'neko', 'spank', 'cuddle', 'erok', 'fox_girl', 'boobs',
-                'smallboobs', 'ero']
+                'cum', 'erokemo', 'les', 'lewdk', 'lewd', 'eroyuri', 'eron', 
+                'cum_jpg', 'nsfw_neko_gif', 'solo', 'anal', 'blowjob', 'pussy', 
+                'tits', 'holoero', 'pussy_jpg', 'femdom', 'spank', 'erok', 'boobs',
+                'ero']
     return random.choice(possible)
-
 
 def hentai(update, context):
     context.bot.send_photo(
