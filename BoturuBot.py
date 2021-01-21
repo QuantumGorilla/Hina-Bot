@@ -30,7 +30,7 @@ else:
 
 def taskete(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No
+                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /simp - SIMP
                               """)
 
 def get_url(identifier):
@@ -239,6 +239,24 @@ def no(update,context):
     file = random.choice(os.listdir('media/no'))
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/no/'+file, 'rb'))
 
+def simp(update, context):
+    reply_user = update.message.reply_to_message
+    file = random.choice(os.listdir('media/simp'))
+    if reply_user == None:
+        if len(context.args) != 0:
+            word = ' '
+            context.bot.send_message(chat_id=update.effective_chat.id, text='SIMP, ' + word.join(context.args))
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/simp/'+file, 'rb'))
+        else:
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/simp/'+file, 'rb'))
+    else:
+        if reply_user.from_user['username'] == None:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='SIMP, ' + reply_user.from_user['first_name'])
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/simp/'+file, 'rb'))
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='SIMP, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + ')')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/simp/'+file, 'rb'))
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -267,6 +285,7 @@ def main():
     dp.add_handler(CommandHandler('respete', respete))
     dp.add_handler(CommandHandler('escribebien', escribeBien))
     dp.add_handler(CommandHandler('no', no))
+    dp.add_handler(CommandHandler('simp', simp))
     run(updater)
     
 if __name__ == '__main__':
