@@ -290,6 +290,24 @@ def cagaste(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Cagaste, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + ')')
             context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/cagaste/'+file, 'rb'))
 
+def fino(update, context):
+    reply_user = update.message.reply_to_message
+    file = random.choice(os.listdir('media/fino'))
+    if reply_user == None:
+        if len(context.args) != 0:
+            word = ' '
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Fino, mi rey (' + word.join(context.args) + ')')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/fino/'+file, 'rb'))
+        else:
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/fino/'+file, 'rb'))
+    else:
+        if reply_user.from_user['username'] == None:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Fino, mi rey (' + reply_user.from_user['first_name'] + ')')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/fino/'+file, 'rb'))
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Fino, mi rey (@'+ reply_user.from_user['username'] + ')')
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/fino/'+file, 'rb'))
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -324,6 +342,7 @@ def main():
     dp.add_handler(CommandHandler('bye', bye))
     dp.add_handler(CommandHandler('perro', perro))
     dp.add_handler(CommandHandler('cagaste', cagaste))
+    dp.add_handler(CommandHandler('fino', fino))
     run(updater)
     
 if __name__ == '__main__':
