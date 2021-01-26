@@ -30,7 +30,7 @@ else:
 
 def taskete(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey
+                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE
                               """)
 
 def get_url(identifier):
@@ -308,6 +308,10 @@ def fino(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Fino, mi rey (@'+ reply_user.from_user['username'] + ')')
             context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/fino/'+file, 'rb'))
 
+def re(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
+    context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('./media/Re.mp3', 'rb'))
+    
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -343,6 +347,7 @@ def main():
     dp.add_handler(CommandHandler('perro', perro))
     dp.add_handler(CommandHandler('cagaste', cagaste))
     dp.add_handler(CommandHandler('fino', fino))
+    dp.add_handler(CommandHandler('re', re))
     run(updater)
     
 if __name__ == '__main__':
