@@ -348,8 +348,9 @@ def callese(update, context):
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Callese.mp4', 'rb'), supports_streaming=True)
 
 def horny(update, context):
+    file = random.choice(os.listdir('media/horny'))
     context.bot.send_message(chat_id=update.effective_chat.id, text='Estoy horny.')
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Horny.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/horny/'+file, 'rb'), supports_streaming=True)
     
 def main():
     Boturu = telegram.Bot(token = TOKEN)
