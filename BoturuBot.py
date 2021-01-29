@@ -231,7 +231,7 @@ def respete(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Respeta, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + '), cachón')
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Respete.mp4', 'rb'), supports_streaming=True)
 
-def escribeBien(update, context):
+def escribe_bien(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Escribe bien, cachón')
     context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/EscribeBien.mp4', 'rb'), supports_streaming=True)
 
@@ -373,7 +373,7 @@ def main():
     dp.add_handler(CommandHandler('die', die))
     dp.add_handler(CommandHandler('uypah', trece))
     dp.add_handler(CommandHandler('respete', respete))
-    dp.add_handler(CommandHandler('escribebien', escribeBien))
+    dp.add_handler(CommandHandler('escribebien', escribe_bien))
     dp.add_handler(CommandHandler('no', no))
     dp.add_handler(CommandHandler('si', si))
     dp.add_handler(CommandHandler('simp', simp))
