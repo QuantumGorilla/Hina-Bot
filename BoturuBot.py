@@ -30,7 +30,7 @@ else:
 
 def taskete(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado
+                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado \n /horny - Estoy horny
                               """)
 
 def get_url(identifier):
@@ -346,6 +346,10 @@ def callese(update, context):
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Callese, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + '), me tiene jodidamente mamado')
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Callese.mp4', 'rb'), supports_streaming=True)
+
+def horny(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Estoy horny.')
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Horny.mp4', 'rb'), supports_streaming=True)
     
 def main():
     Boturu = telegram.Bot(token = TOKEN)
@@ -385,6 +389,7 @@ def main():
     dp.add_handler(CommandHandler('re', re))
     dp.add_handler(CommandHandler('abueno', abueno))
     dp.add_handler(CommandHandler('callese', callese))
+    dp.add_handler(CommandHandler('horny', horny))
     run(updater)
     
 if __name__ == '__main__':
