@@ -308,7 +308,7 @@ def fino(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Fino, mi rey (@'+ reply_user.from_user['username'] + ')')
             context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/fino/'+file, 'rb'))
 
-def re(update, context):
+def re_scream(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
     context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('./media/Re.mp3', 'rb'))
 
@@ -391,7 +391,7 @@ def main():
     dp.add_handler(CommandHandler('perro', perro))
     dp.add_handler(CommandHandler('cagaste', cagaste))
     dp.add_handler(CommandHandler('fino', fino))
-    dp.add_handler(CommandHandler('re', re))
+    dp.add_handler(CommandHandler('re', re_scream))
     dp.add_handler(CommandHandler('abueno', abueno))
     dp.add_handler(CommandHandler('callese', callese))
     dp.add_handler(CommandHandler('horny', horny))
