@@ -355,7 +355,11 @@ def horny(update, context):
 def meto(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='A ti también te la meto')
     context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Meto.mp4', 'rb'), supports_streaming=True)
-        
+
+def rico(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Rico hpta')
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Rico.mp4', 'rb'), supports_streaming=True)
+    
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -396,6 +400,7 @@ def main():
     dp.add_handler(CommandHandler('callese', callese))
     dp.add_handler(CommandHandler('horny', horny))
     dp.add_handler(CommandHandler('meto', meto))
+    dp.add_handler(CommandHandler('rico', rico))
     run(updater)
     
 if __name__ == '__main__':
