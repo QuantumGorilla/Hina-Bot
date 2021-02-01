@@ -366,7 +366,7 @@ def kya(update, context):
 
 def dato(update, context):
     reply_user = update.message.reply_to_message
-    file = random.choice(os.listdir('media/horny'))
+    file = random.choice(os.listdir('media/dato'))
     if reply_user == None:
         if len(context.args) != 0:
             word = ' '
