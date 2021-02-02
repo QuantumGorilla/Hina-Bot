@@ -357,8 +357,9 @@ def meto(update, context):
     context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Meto.mp4', 'rb'), supports_streaming=True)
 
 def rico(update, context):
+    file = random.choice(os.listdir('media/rico'))
     context.bot.send_message(chat_id=update.effective_chat.id, text='Rico hpta')
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Rico.mp4', 'rb'), supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/rico/'+file, 'rb'), supports_streaming=True)
     
 def kya(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Kya~')
