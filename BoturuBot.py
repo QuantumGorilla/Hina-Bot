@@ -30,7 +30,7 @@ else:
 
 def taskete(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado \n /horny - Estoy horny \n /meto - Hijuputa, tetra hijueputa \n /rico - Rico hpta \n /kya - Kya~ \n /dato - Que buen dato, crack
+                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado \n /horny - Estoy horny \n /meto - Hijuputa, tetra hijueputa \n /rico - Rico hpta \n /kya - Kya~ \n /dato - Que buen dato, crack \n /antojaron - Ya antojaron
                               """)
 
 def get_url(identifier):
@@ -382,7 +382,12 @@ def dato(update, context):
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Datazo, crack, pero nadie te pregunto, cv (@' + reply_user.from_user['username'] + ')')
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/dato/'+file, 'rb'), supports_streaming=True)
-    
+
+def antojaron(update,context):
+    file = random.choice(os.listdir('media/antojaron'))
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Ya antojaron')
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/antojaron/'+file, 'rb'))
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -426,6 +431,7 @@ def main():
     dp.add_handler(CommandHandler('rico', rico))
     dp.add_handler(CommandHandler('kya', kya))
     dp.add_handler(CommandHandler('dato', dato))
+    dp.add_handler(CommandHandler('antojaron', antojaron))
     run(updater)
     
 if __name__ == '__main__':
