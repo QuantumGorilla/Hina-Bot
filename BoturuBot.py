@@ -405,7 +405,7 @@ def decepcion(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Decepcionado de ti, ' + reply_user.from_user['first_name'])
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Decepcion.mp4', 'rb'), supports_streaming=True)
         else:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Decepcionado de ti, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'])
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Decepcionado de ti, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + ')')
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Decepcion.mp4', 'rb'), supports_streaming=True)
 
 def tragatela(update, context):
