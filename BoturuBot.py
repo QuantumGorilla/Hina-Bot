@@ -437,10 +437,10 @@ def sapo(update, context):
     else:
         if reply_user.from_user['username'] == None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Cule sapo, ' + reply_user.from_user['first_name'])
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Tragatela.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Sapo.mp4', 'rb'), supports_streaming=True)
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Cule sapo, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + ')')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Tragatela.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Sapo.mp4', 'rb'), supports_streaming=True)
 
 def main():
     Boturu = telegram.Bot(token = TOKEN)
