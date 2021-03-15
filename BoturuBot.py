@@ -410,20 +410,21 @@ def decepcion(update, context):
 
 def tragatela(update, context):
     reply_user = update.message.reply_to_message
+    file = random.choice(os.listdir('media/tragatela'))
     if reply_user == None:
         if len(context.args) != 0:
             word = ' '
             context.bot.send_message(chat_id=update.effective_chat.id, text='Bueno, tragatela (' + word.join(context.args) + ')')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Tragatela.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/tragatela/' + file, 'rb'), supports_streaming=True)
         else:
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Tragatela.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/tragatela/' + file, 'rb'), supports_streaming=True)
     else:
         if reply_user.from_user['username'] == None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Tragatela, ' + reply_user.from_user['first_name'] + ', ya, tragatela')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Tragatela.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/tragatela/' + file, 'rb'), supports_streaming=True)
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Tragatela, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + '), ya, tragatela')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Tragatela.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/tragatela/' + file, 'rb'), supports_streaming=True)
 
 def sapo(update, context):
     reply_user = update.message.reply_to_message
