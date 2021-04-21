@@ -312,9 +312,9 @@ def re_scream(update, context):
     file = random.choice(os.listdir('media/re'))
     context.bot.send_message(chat_id=update.effective_chat.id, text='REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
     if 'mp3' in file:
-        context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('./media/'+file, 'rb'))
+        context.bot.send_audio(chat_id=update.effective_chat.id, audio=open('./media/re/'+file, 'rb'))
     else:
-        context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/'+file, 'rb'), supports_streaming=True)
+        context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/re/'+file, 'rb'), supports_streaming=True)
 
 def abueno(update, context):
     reply_user = update.message.reply_to_message
