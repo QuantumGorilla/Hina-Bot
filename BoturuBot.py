@@ -455,20 +455,21 @@ def hya(update,context):
 
 def marica(update, context):
     reply_user = update.message.reply_to_message
+    file = random.choice(os.listdir('media/marica'))
     if reply_user == None:
         if len(context.args) != 0:
             word = ' '
             context.bot.send_message(chat_id=update.effective_chat.id, text='MMMMMJUMMMMMMM (' + word.join(context.args) + ')')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Marica.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/marica'+file, 'rb'), supports_streaming=True)
         else:
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Marica.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/marica'+file, 'rb'), supports_streaming=True)
     else:
         if reply_user.from_user['username'] == None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='MMMMMJUMMMMMMM (' + reply_user.from_user['first_name'] + ')')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Marica.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/marica'+file, 'rb'), supports_streaming=True)
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='MMMMMJUMMMMMMM (@'+ reply_user.from_user['username'] + ')')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Marica.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/marica'+file, 'rb'), supports_streaming=True)
 
 def chad(update,context):
     context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Chad.mp4', 'rb'), supports_streaming=True)
