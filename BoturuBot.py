@@ -336,20 +336,21 @@ def abueno(update, context):
 
 def callese(update, context):
     reply_user = update.message.reply_to_message
+    file = random.choice(os.listdir('media/callese'))
     if reply_user == None:
         if len(context.args) != 0:
             word = ' '
             context.bot.send_message(chat_id=update.effective_chat.id, text='Callese, ' + word.join(context.args) + ', me tiene jodidamente mamado')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Callese.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/callese/'+file, 'rb'), supports_streaming=True)
         else:
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Callese.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/callese/'+file, 'rb'), supports_streaming=True)
     else:
         if reply_user.from_user['username'] == None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Callese, ' + reply_user.from_user['first_name'] + ', me tiene jodidamente mamado')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Callese.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/callese/'+file, 'rb'), supports_streaming=True)
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Callese, '+ reply_user.from_user['first_name'] + ' (@' + reply_user.from_user['username'] + '), me tiene jodidamente mamado')
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Callese.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/callese/'+file, 'rb'), supports_streaming=True)
 
 def horny(update, context):
     file = random.choice(os.listdir('media/horny'))
