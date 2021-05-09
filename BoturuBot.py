@@ -508,6 +508,11 @@ def come(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Vaya a come monda, @'+ reply_user.from_user['username'] + '(' + reply_user.from_user['first_name'] + ')')
             context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Come.mp4', 'rb'), supports_streaming=True)
 
+def siono(update, context):
+    response = requests.get('https://yesno.wtf/api').json()
+    answer = 'Sí' if response['answer'] == 'yes' else 'No'
+    image_url = response['image']
+    context.bot.send_animation(chat_id=update.effective_chat.id, animation=image_url, caption=answer)
 
 def main():
     Boturu = telegram.Bot(token = TOKEN)
@@ -562,6 +567,7 @@ def main():
     dp.add_handler(CommandHandler('chad', chad))
     dp.add_handler(CommandHandler('risa', risa))
     dp.add_handler(CommandHandler('come', come))
+    dp.add_handler(CommandHandler('siono', siono))
     run(updater)
     
 if __name__ == '__main__':
