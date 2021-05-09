@@ -517,7 +517,7 @@ def siono(update, context):
 def foxy(update, context):
     response = requests.get('https://randomfox.ca/floof/?ref=apilist.fun').json()
     image_url = response['image']
-    context.bot.send_image(chat_id=update.effective_chat.id, photo=image_url)
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=image_url)
 
 def main():
     Boturu = telegram.Bot(token = TOKEN)
