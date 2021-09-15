@@ -30,7 +30,7 @@ else:
 
 def taskete(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado \n /horny - Estoy horny \n /meto - Hijuputa, tetra hijueputa \n /rico - Rico hpta \n /kya - Kya~ \n /dato - Que buen dato, crack \n /antojaron - Ya antojaron \n /chirrete - Me viste cara de chirrete? \n /decepcion - Que decepción \n /tragatela - Bueno, tragatela \n /sapo - Cule sapo \n /hya - #HYAPOSTING \n /marica - MARICAAAAA \n /chad - Can you feel my heart \n /risa - Cule risa \n /come - Vaya a come monda \n /siono - Sí o no \n /foxy - Cute foxy \n /qk - Mi qk pa uste' \n /felicidades - Evangelion te felicita \n /this - Filthy Frank
+                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado \n /horny - Estoy horny \n /meto - Hijuputa, tetra hijueputa \n /rico - Rico hpta \n /kya - Kya~ \n /dato - Que buen dato, crack \n /antojaron - Ya antojaron \n /chirrete - Me viste cara de chirrete? \n /decepcion - Que decepción \n /tragatela - Bueno, tragatela \n /sapo - Cule sapo \n /hya - #HYAPOSTING \n /marica - MARICAAAAA \n /chad - Can you feel my heart \n /risa - Cule risa \n /come - Vaya a come monda \n /siono - Sí o no \n /foxy - Cute foxy \n /qk - Mi qk pa uste' \n /felicidades - Evangelion te felicita \n /this - Filthy Frank \n /cringe - Oh no, cringe
                               """)
 
 def get_url(identifier):
@@ -539,6 +539,20 @@ def felicidades(update,context):
 def this(update,context):
     context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/This.mp4', 'rb'), supports_streaming=True, caption='This is so much cancer')
 
+def cringe(update, context):
+    reply_user = update.message.reply_to_message
+    if reply_user == None:
+        if len(context.args) != 0:
+            word = ' '
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True, caption='Das cringe, ' + word.join(context.args))
+        else:
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True)
+    else:
+        if reply_user.from_user['username'] == None:            
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True, caption='Das cringe, ' + reply_user.from_user['first_name'])
+        else:
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True, caption='Das cringe, @'+ reply_user.from_user['username'] + '(' + reply_user.from_user['first_name'] + ')')
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -596,7 +610,8 @@ def main():
     dp.add_handler(CommandHandler('foxy', foxy))
     dp.add_handler(CommandHandler('qk', qk))
     dp.add_handler(CommandHandler('felicidades', felicidades))
-    dp.add_handler(CommandHandler('this', this))    
+    dp.add_handler(CommandHandler('this', this))
+    dp.add_handler(CommandHandler('cringe', cringe))
     run(updater)
     
 if __name__ == '__main__':
