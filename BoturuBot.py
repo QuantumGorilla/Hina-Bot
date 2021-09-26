@@ -30,7 +30,7 @@ else:
 
 def taskete(update, context):
      update.message.reply_text("""
-                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado \n /horny - Estoy horny \n /meto - Hijuputa, tetra hijueputa \n /rico - Rico hpta \n /kya - Kya~ \n /dato - Que buen dato, crack \n /antojaron - Ya antojaron \n /chirrete - Me viste cara de chirrete? \n /decepcion - Que decepción \n /tragatela - Bueno, tragatela \n /sapo - Cule sapo \n /hya - #HYAPOSTING \n /marica - MARICAAAAA \n /chad - Can you feel my heart \n /risa - Cule risa \n /come - Vaya a come monda \n /siono - Sí o no \n /foxy - Cute foxy \n /qk - Mi qk pa uste' \n /felicidades - Evangelion te felicita \n /this - Filthy Frank \n /cringe - Oh no, cringe \n /mister - El chico lindo del corbatin \n /seso - Yo no sé de eso, hablame de seso mejor \n /tiktok - El negrito de ojos claros
+                              Senpai, estos son los comandos u//u: \n /taskete - Mostrar los comandos \n /doggo - Foto random de un doggo \n /neko - Foto random de un neko \n /hentai - NSFW ;) \n /dollar - Every dollar spent on... \n /oilo - Oilo \n /pat - uwu \n /baka - Baka >_< \n /hey - Hey, loco, que pasa valemia \n /navidad - la navidad es todo aquello \n /quien - Quién monda es Dorian? \n /buenosdias - Ohayo, darin! (Chayanne) \n /buenasnoches - Piolin te desea buenas noches \n /princesas - Comando especial para Valeria \n /noticias - Noticias iconicas de Colombia \n /despegala - Despegala, cachón \n /metienesque - Me tienes que sopletear \n /comedia - Donco media \n /mimir - Hora de mimir \n /die - I just wanna die \n /uypah - Uy, pah, lo dijiteeeeeeeee \n /respete - No, señor, respete \n /escribebien - Escribe bien, cachón \n /no - No \n /si - Sí \n /simp - SIMP \n /ayno - Ay, no, eso sí jamás \n /bye - La despego \n /perro - Perro con perro \n /cagaste - Cagaste, master \n /fino - Fino, mi rey \n /re - REEEEEEEEE \n /abueno - Te me cuidas, crack \n /callese - Me tiene jodidamente mamado \n /horny - Estoy horny \n /meto - Hijuputa, tetra hijueputa \n /rico - Rico hpta \n /kya - Kya~ \n /dato - Que buen dato, crack \n /antojaron - Ya antojaron \n /chirrete - Me viste cara de chirrete? \n /decepcion - Que decepción \n /tragatela - Bueno, tragatela \n /sapo - Cule sapo \n /hya - #HYAPOSTING \n /marica - MARICAAAAA \n /chad - Can you feel my heart \n /risa - Cule risa \n /come - Vaya a come monda \n /siono - Sí o no \n /foxy - Cute foxy \n /qk - Mi qk pa uste' \n /felicidades - Evangelion te felicita \n /this - Filthy Frank \n /cringe - Oh no, cringe \n /mister - El chico lindo del corbatin \n /seso - Yo no sé de eso, hablame de seso mejor \n /tiktok - El negrito de ojos claros \n /nojoda - Que vivan los mongolicos, nojoda!
                               """)
 
 def get_url(identifier):
@@ -572,6 +572,20 @@ def seso(update, context):
 
 def tiktok(update,context):
     context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Tiktok.mp4', 'rb'), supports_streaming=True, caption='Te lo dice el negrito de ojos claros')
+    
+def nojoda(update, context):
+    reply_user = update.message.reply_to_message
+    if reply_user == None:
+        if len(context.args) != 0:
+            word = ' '
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Nojoda.mp4', 'rb'), supports_streaming=True, caption='Que viva, ' + word.join(context.args) + ', nojoda!')
+        else:
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Nojoda.mp4', 'rb'), supports_streaming=True)
+    else:
+        if reply_user.from_user['username'] == None:            
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Nojoda.mp4', 'rb'), supports_streaming=True, caption='Que viva, ' + reply_user.from_user['first_name'] + ', nojoda!')
+        else:
+            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Nojoda.mp4', 'rb'), supports_streaming=True, caption='Que viva, @'+ reply_user.from_user['username'] + '(' + reply_user.from_user['first_name'] + '), nojoda!')
 
 def main():
     Boturu = telegram.Bot(token = TOKEN)
@@ -635,6 +649,7 @@ def main():
     dp.add_handler(CommandHandler('mister', mister))
     dp.add_handler(CommandHandler('seso', seso))
     dp.add_handler(CommandHandler('tiktok', tiktok))
+    dp.add_handler(CommandHandler('nojoda', nojoda))
     run(updater)
     
 if __name__ == '__main__':
