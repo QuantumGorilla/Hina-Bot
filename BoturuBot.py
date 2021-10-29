@@ -542,7 +542,7 @@ def this(update,context):
 def cringe(update, context):
     reply_user = update.message.reply_to_message
     filename = random.choice(os.listdir('media/cringe'))
-    video = open(f"./media/cringe/{filename}")
+    video = open(f"./media/cringe/{filename}", 'rb')
     if reply_user == None:
         if len(context.args) != 0:
             word = ' '
@@ -594,11 +594,11 @@ def mimido(update, context):
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/mimido/'+file, 'rb'), supports_streaming=True, caption='Zzzzzzzzzzzz')
 
 def caro(update, context):
-    video = open('./media/ta_caro.mp4')
+    video = open('./media/ta_caro.mp4', 'rb')
     context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
 
 def llorar(update, context):
-    video = open('./media/llorar.mp4')
+    video = open('./media/llorar.mp4', 'rb')
     context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
 
 def main():
