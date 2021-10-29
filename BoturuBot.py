@@ -593,11 +593,11 @@ def mimido(update, context):
 
 def caro(update, context):
     video = open('./media/ta_caro.mp4')
-    context.bot.send_photo(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
 
 def llorar(update, context):
     video = open('./media/llorar.mp4')
-    context.bot.send_photo(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
+    context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
 
 def main():
     Boturu = telegram.Bot(token = TOKEN)
