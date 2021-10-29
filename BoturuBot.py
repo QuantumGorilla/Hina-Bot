@@ -541,7 +541,7 @@ def this(update,context):
 
 def cringe(update, context):
     reply_user = update.message.reply_to_message
-    filename = random.choice(os.listdir('media/mimido'))
+    filename = random.choice(os.listdir('media/cringe'))
     video = open(f"./media/cringe/{filename}")
     if reply_user == None:
         if len(context.args) != 0:
