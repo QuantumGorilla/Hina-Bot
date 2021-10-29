@@ -591,7 +591,7 @@ def nojoda(update, context):
 
 def mimido(update, context):
     file = random.choice(os.listdir('media/mimido'))
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/mimido/'+file, 'rb'), supports_streaming=True, caption='Zzzzzzzzzzzz')
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/mimido/'+file, 'rb'), caption='Zzzzzzzzzzzz')
 
 def caro(update, context):
     video = open('./media/ta_caro.mp4', 'rb')
