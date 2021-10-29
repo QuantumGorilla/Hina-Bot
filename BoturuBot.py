@@ -541,17 +541,19 @@ def this(update,context):
 
 def cringe(update, context):
     reply_user = update.message.reply_to_message
+    filename = random.choice(os.listdir('media/mimido'))
+    video = open(f"./media/cringe/{filename}")
     if reply_user == None:
         if len(context.args) != 0:
             word = ' '
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True, caption='Das cringe, ' + word.join(context.args))
+            context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True, caption='Das cringe, ' + word.join(context.args))
         else:
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True)
+            context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
     else:
         if reply_user.from_user['username'] == None:            
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True, caption='Das cringe, ' + reply_user.from_user['first_name'])
+            context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True, caption='Das cringe, ' + reply_user.from_user['first_name'])
         else:
-            context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Cringe.mp4', 'rb'), supports_streaming=True, caption='Das cringe, @'+ reply_user.from_user['username'] + '(' + reply_user.from_user['first_name'] + ')')
+            context.bot.send_video(chat_id=update.effective_chat.id, video=video, supports_streaming=True, caption='Das cringe, @'+ reply_user.from_user['username'] + '(' + reply_user.from_user['first_name'] + ')')
 
 def mister(update,context):
     context.bot.send_video(chat_id=update.effective_chat.id, video=open('./media/Mister.mp4', 'rb'), supports_streaming=True, caption='El chico lindo del corbatin')
