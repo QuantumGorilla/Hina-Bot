@@ -595,6 +595,10 @@ def caro(update, context):
     video = open('./media/ta_caro.mp4')
     context.bot.send_photo(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
 
+def llorar(update, context):
+    video = open('./media/llorar.mp4')
+    context.bot.send_photo(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -660,6 +664,7 @@ def main():
     dp.add_handler(CommandHandler('nojoda', nojoda))
     dp.add_handler(CommandHandler('mimido', mimido))
     dp.add_handler(CommandHandler('caro', caro))
+    dp.add_handler(CommandHandler('llorar', llorar))
     run(updater)
     
 if __name__ == '__main__':
