@@ -591,6 +591,10 @@ def mimido(update, context):
     file = random.choice(os.listdir('media/mimido'))
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=open('./media/mimido/'+file, 'rb'), supports_streaming=True, caption='Zzzzzzzzzzzz')
 
+def caro(update, context):
+    video = open('./media/ta_caro.mp4')
+    context.bot.send_photo(chat_id=update.effective_chat.id, video=video, supports_streaming=True)
+
 def main():
     Boturu = telegram.Bot(token = TOKEN)
     updater = Updater(Boturu.token, use_context=True)
@@ -655,6 +659,7 @@ def main():
     dp.add_handler(CommandHandler('tiktok', tiktok))
     dp.add_handler(CommandHandler('nojoda', nojoda))
     dp.add_handler(CommandHandler('mimido', mimido))
+    dp.add_handler(CommandHandler('caro', caro))
     run(updater)
     
 if __name__ == '__main__':
