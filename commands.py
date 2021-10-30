@@ -126,12 +126,11 @@ def hentai(update, context):
 
 def reply_with(message: str, function: Callable[[Update, CallbackContext], None]):
     def send(update: Update, context: CallbackContext):
-
         reply_user = update.message.reply_to_message
         user = update.message.from_user
         msg = message.replace("[from]", f'@{user["username"]}')
         to = ""
-        if reply_user:
+        if reply_user == None:
             if len(context.args) > 0:
                 to = " ".join(context.args)
             else:
