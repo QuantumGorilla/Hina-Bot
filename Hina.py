@@ -54,7 +54,9 @@ class Hina:
 
     def add_command(self, command: Command):
         self.help += f"\n /{command.name} - {command.description}"
-        self.updater.dispatcher.add_handler(command.callback)
+        self.updater.dispatcher.add_handler(
+            CommandHandler(command.name, command.callback)
+        )
 
     def add_commands(self, commands: List[Command]):
         for command in commands:
