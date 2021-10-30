@@ -263,7 +263,7 @@ commands: List[Command] = [
     Command("rico", "Rico hpta", choose_video("rico", "Rico hpta")),
     Command("kya", "Kya~", send_video("Kya.mp4", "Kya~")),
     Command("dato", "Qué buen dato, crack", reply_with(
-        "Datazo, crack, pero nadie te preguntó, cv ([to])")),
+        "Datazo, crack, pero nadie te preguntó, cv ([to])", choose_video("dato"))),
     Command("antojaron", "Ya antojaron",
             choose_video("antojaron", "Ya antojaron")),
     Command("chirrete", "Me viste cara de chirrete?",
