@@ -34,7 +34,7 @@ class Hina:
         self.add_command(
             Command(
                 "taskete",
-                "Muestra esta ayuda",
+                "Muestra los comandos",
                 lambda update, _: update.message.reply_text(self.help)
             )
         )
