@@ -1,6 +1,6 @@
 import logging
 from os import getenv
-from typing import Callable
+from typing import Callable, List
 from telegram.bot import Bot
 from telegram.ext.callbackcontext import CallbackContext
 from telegram.ext.commandhandler import CommandHandler
@@ -55,3 +55,7 @@ class Hina:
     def add_command(self, command: Command):
         self.help += f"\n /{command.name} - {command.description}"
         self.updater.dispatcher.add_handler(command.callback)
+
+    def add_commands(self, commands: List[Command]):
+        for command in commands:
+            self.add_command(command)
