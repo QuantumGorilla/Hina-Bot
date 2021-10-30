@@ -48,7 +48,7 @@ def send_video(src: str, message=None):
     return send
 
 
-def choose_photo(folder: str, message=None):
+def choose_photo(folder: str, message=None, caption=None):
     """Generates a function for sending a photo with an optional message"""
     def send(update: Update, context: CallbackContext):
         if message != None:
@@ -58,6 +58,7 @@ def choose_photo(folder: str, message=None):
         context.bot.send_photo(
             chat_id=update.effective_chat.id,
             photo=open(f"./media/{folder}/{filename}", "rb"),
+            caption=caption
         )
     return send
 
@@ -299,7 +300,7 @@ commands: List[Command] = [
     Command("tiktok", "El negrito de ojos claros", send_video("Tiktok.mp4")),
     Command("nojoda", "Que vivan los mongólicos, nojoda!", reply_with(
         "Que vida [to], nojoda!", send_video("Nojoda.mp4"))),
-    Command("mimido", "Mimido zzzzz", choose_video(
+    Command("mimido", "Mimido zzzzz", choose_photo(
         "mimido", caption="Zzzzzzzzzzzz")),
     Command("llorar", "Deja de llorar, maldita puta",
             send_video("llorar.mp4")),
