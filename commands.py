@@ -131,7 +131,7 @@ def reply_with(message: str, function: Callable[[Update, CallbackContext], None]
         user = update.message.from_user
         msg = message.replace("[from]", f'@{user["username"]}')
         to = ""
-        logging.info("reply_user:"+reply_user)
+        logging.info("reply_user:", reply_user)
         if reply_user == None:
             if len(context.args) > 0:
                 to = " ".join(context.args)
