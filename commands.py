@@ -235,7 +235,7 @@ commands: List[Command] = [
     Command("die", "I just wanna die", send_video(
         "Die.mp4", "Solo quiero morir :(")),
     Command("uypah", "Uy, pah, lo dijiteeeeeeeee", reply_with(
-        "Uy, pah, LO DIJITEEEEEE ([to])", send_video("Trece.mp4"))),
+        "Uy, pah, LO DIJITEEEEEEE ([to])", send_video("Trece.mp4"))),
     Command("respete", "No, señor, respete", reply_with(
         "Respeta, [to], cachón", send_video("Respete.mp4"))),
     Command("escribebien", "Escribe bien, cachón", send_video(
