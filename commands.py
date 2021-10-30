@@ -1,7 +1,9 @@
 
 import os
 from typing import List
+import typing
 from telegram.ext import CallbackContext
+from telegram import Update
 import nekos
 import requests
 import re
@@ -10,18 +12,73 @@ import random
 from Hina import Command
 
 
+def send_photo_from_url(src: str):
+    """Generates a function for sending a photo from an URL"""
+    def send(update: Update, context: CallbackContext):
+        context.bot.send_photo(
+            chat_id=update.effective_chat.id, photo=src
+        )
+    return send
+
+
+def send_video(src: str, message=None):
+    """Generates a function for sending a video with an optional message"""
+    def send(update: Update, context: CallbackContext):
+        if message != None:
+            context.bot.send_message(
+                chat_id=update.effective_chat.id, text=message)
+        context.bot.send_video(
+            chat_id=update.effective_chat.id,
+            video=open(f"./media/{src}", "rb"),
+            supports_streaming=True
+        )
+    return send
+
+
+def choose_photo(folder: str, message=None):
+    """Generates a function for sending a photo with an optional message"""
+    def send(update: Update, context: CallbackContext):
+        if message != None:
+            context.bot.send_message(
+                chat_id=update.effective_chat.id, text=message)
+        filename = random.choice(os.listdir("./media/{folder}"))
+        context.bot.send_photo(
+            chat_id=update.effective_chat.id,
+            photo=open(f"./media/{folder}/{filename}", "rb"),
+        )
+    return send
+
+
+def choose_video(folder: str, message=None, caption=None):
+    """Generates a function for sending a video with an optional message"""
+    def send(update: Update, context: CallbackContext):
+        if message != None:
+            context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                message=message
+            )
+        filename = random.choice(os.listdir("./media/{folder}"))
+        context.bot.send_video(
+            chat_id=update.effective_chat.id,
+            video=open(f"./media/{folder}/{filename}", "rb"),
+            supports_streaming=True,
+            caption=caption
+        )
+    return send
+
+
 def get_url(identifier):
     if identifier == 0:
         contents = requests.get("https://random.dog/woof.json").json()
         url = contents["url"]
         return url
     else:
-        contents = requests.get("http://aws.random.cat//meow").json()
+        contents = requests.get("http://aws.random.cat/meow").json()
         url = contents["file"]
         return url
 
 
-def get_image_url(identifier):
+def get_valid_url(identifier):
     allowed_extension = ["jpg", "jpeg", "png"]
     file_extension = ""
     while file_extension not in allowed_extension:
@@ -34,37 +91,25 @@ def get_image_url(identifier):
 
 
 def doggo(update, context):
-    url = get_image_url(0)
+    url = get_valid_url(0)
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=url)
 
 
 def neko(update, context):
-    url = get_image_url(1)
+    url = get_valid_url(1)
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=url)
 
 
-def random_target():
-    possible = ["feet", "yuri", "trap", "futanari", "hololewd", "lewdkemo",
-                "cum", "erokemo", "les", "lewdk", "lewd", "eroyuri", "eron",
-                "cum_jpg", "nsfw_neko_gif", "solo", "anal", "blowjob", "pussy",
-                "tits", "holoero", "pussy_jpg", "femdom", "spank", "erok", "boobs",
-                "ero"]
-    return random.choice(possible)
-
-
 def hentai(update, context):
+    tag = random.choice([
+        "feet", "yuri", "trap", "futanari", "hololewd", "lewdkemo",
+        "cum", "erokemo", "les", "lewdk", "lewd", "eroyuri", "eron",
+        "cum_jpg", "nsfw_neko_gif", "solo", "anal", "blowjob", "pussy",
+        "tits", "holoero", "pussy_jpg", "femdom", "spank", "erok", "boobs",
+        "ero"
+    ])
     context.bot.send_photo(
-        chat_id=update.effective_chat.id, photo=nekos.img(random_target()))
-
-
-def dollar(update, context):
-    context.bot.send_photo(
-        chat_id=update.effective_chat.id, photo=nekos.img("gecg"))
-
-
-def oilo(update, context):
-    context.bot.send_photo(
-        chat_id=update.effective_chat.id, photo=nekos.img("smug"))
+        chat_id=update.effective_chat.id, photo=nekos.img(tag))
 
 
 def pat(update, context: CallbackContext):
@@ -118,45 +163,11 @@ def baka(update, context):
                 chat_id=update.effective_chat.id, photo=nekos.img("baka"))
 
 
-def hey(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Hey.mp4", "rb"), supports_streaming=True)
-
-
 def navidad(update, context):
     context.bot.send_message(
         chat_id=update.effective_chat.id, text="Feliz navidad, s-senpai! uwu")
     context.bot.send_audio(chat_id=update.effective_chat.id,
                            audio=open("./media/Navidad.mp3", "rb"))
-
-
-def quien(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Quién?")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Quien.mp4", "rb"), supports_streaming=True)
-
-
-def buenosdias(update, context):
-    file = random.choice(os.listdir("media/chayanne"))
-    context.bot.send_photo(chat_id=update.effective_chat.id,
-                           photo=open("./media/chayanne/"+file, "rb"))
-
-
-def buenasnoches(update, context):
-    file = random.choice(os.listdir("media/buenas_noches"))
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(
-        "./media/buenas_noches/"+file, "rb"))
-
-
-def princesas(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Princesas.mp4", "rb"), supports_streaming=True)
-
-
-def noticias(update, context):
-    file = random.choice(os.listdir("media/noticias"))
-    context.bot.send_photo(chat_id=update.effective_chat.id,
-                           photo=open("./media/noticias/"+file, "rb"))
 
 
 def despegala(update, context):
@@ -230,20 +241,6 @@ def comedia(update, context):
                 "./media/comedia/"+file, "rb"))
 
 
-def mimir(update, context):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="Hora de mimir! uwu")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Mimir.mp4", "rb"), supports_streaming=True)
-
-
-def die(update, context):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="Solo quiero morir :(")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Die.mp4", "rb"), supports_streaming=True)
-
-
 def trece(update, context):
     reply_user = update.message.reply_to_message
     if reply_user == None:
@@ -294,25 +291,6 @@ def respete(update, context):
                 "./media/Respete.mp4", "rb"), supports_streaming=True)
 
 
-def escribe_bien(update, context):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="Escribe bien, cachón")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/EscribeBien.mp4", "rb"), supports_streaming=True)
-
-
-def no(update, context):
-    file = random.choice(os.listdir("media/no"))
-    context.bot.send_photo(chat_id=update.effective_chat.id,
-                           photo=open("./media/no/"+file, "rb"))
-
-
-def si(update, context):
-    file = random.choice(os.listdir("media/yes"))
-    context.bot.send_photo(chat_id=update.effective_chat.id,
-                           photo=open("./media/yes/"+file, "rb"))
-
-
 def simp(update, context):
     reply_user = update.message.reply_to_message
     file = random.choice(os.listdir("media/simp"))
@@ -337,25 +315,6 @@ def simp(update, context):
                                      reply_user.from_user["first_name"] + " (@" + reply_user.from_user["username"] + ")")
             context.bot.send_photo(
                 chat_id=update.effective_chat.id, photo=open("./media/simp/"+file, "rb"))
-
-
-def ayno(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Ayno.mp4", "rb"), supports_streaming=True)
-
-
-def bye(update, context):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="La despego, chao, cachones")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Bye.mp4", "rb"), supports_streaming=True)
-
-
-def perro(update, context):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="Perro con perro, perro con perro")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Perro.mp4", "rb"), supports_streaming=True)
 
 
 def cagaste(update, context):
@@ -474,35 +433,6 @@ def callese(update, context):
                 "./media/callese/"+file, "rb"), supports_streaming=True)
 
 
-def horny(update, context):
-    file = random.choice(os.listdir("media/horny"))
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="Estoy horny.")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/horny/"+file, "rb"), supports_streaming=True)
-
-
-def meto(update, context):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="A ti también te la meto")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Meto.mp4", "rb"), supports_streaming=True)
-
-
-def rico(update, context):
-    file = random.choice(os.listdir("media/rico"))
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="Rico hpta")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/rico/"+file, "rb"), supports_streaming=True)
-
-
-def kya(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Kya~")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Kya.mp4", "rb"), supports_streaming=True)
-
-
 def dato(update, context):
     reply_user = update.message.reply_to_message
     file = random.choice(os.listdir("media/dato"))
@@ -527,19 +457,6 @@ def dato(update, context):
                                      text="Datazo, crack, pero nadie te pregunto, cv (@" + reply_user.from_user["username"] + ")")
             context.bot.send_video(chat_id=update.effective_chat.id, video=open(
                 "./media/dato/"+file, "rb"), supports_streaming=True)
-
-
-def antojaron(update, context):
-    file = random.choice(os.listdir("media/antojaron"))
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="Ya antojaron")
-    context.bot.send_photo(chat_id=update.effective_chat.id,
-                           photo=open("./media/antojaron/"+file, "rb"))
-
-
-def chirrete(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Chirrete.mp4", "rb"), supports_streaming=True)
 
 
 def decepcion(update, context):
@@ -619,13 +536,6 @@ def sapo(update, context):
                 "./media/sapo/"+file, "rb"), supports_streaming=True)
 
 
-def hya(update, context):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id, text="#HYYYYYAAAAAAA_POSTING")
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Hya.mp4", "rb"), supports_streaming=True)
-
-
 def marica(update, context):
     reply_user = update.message.reply_to_message
     file = random.choice(os.listdir("media/marica"))
@@ -650,11 +560,6 @@ def marica(update, context):
                                      text="MMMMMJUMMMMMMM (@" + reply_user.from_user["username"] + ")")
             context.bot.send_video(chat_id=update.effective_chat.id, video=open(
                 "./media/marica/"+file, "rb"), supports_streaming=True)
-
-
-def chad(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Chad.mp4", "rb"), supports_streaming=True)
 
 
 def risa(update, context):
@@ -741,16 +646,6 @@ def qk(update, context):
                                    caption="Mi qk pa ti, @" + reply_user.from_user["username"] + "(" + reply_user.from_user["first_name"] + ")")
 
 
-def felicidades(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Felicidades.mp4", "rb"), supports_streaming=True, caption="Felicidades!")
-
-
-def this(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/This.mp4", "rb"), supports_streaming=True, caption="This is so much cancer")
-
-
 def cringe(update, context):
     reply_user = update.message.reply_to_message
     filename = random.choice(os.listdir("media/cringe"))
@@ -772,11 +667,6 @@ def cringe(update, context):
                                    caption="Das cringe, @" + reply_user.from_user["username"] + "(" + reply_user.from_user["first_name"] + ")")
 
 
-def mister(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Mister.mp4", "rb"), supports_streaming=True, caption="El chico lindo del corbatin")
-
-
 def seso(update, context):
     reply_user = update.message.reply_to_message
     if reply_user == None:
@@ -794,11 +684,6 @@ def seso(update, context):
         else:
             context.bot.send_video(chat_id=update.effective_chat.id, video=open("./media/Seso.mp4", "rb"), supports_streaming=True,
                                    caption="Yo no sé de eso, @" + reply_user.from_user["username"] + "(" + reply_user.from_user["first_name"] + "), hablame de seso mejor")
-
-
-def tiktok(update, context):
-    context.bot.send_video(chat_id=update.effective_chat.id, video=open(
-        "./media/Tiktok.mp4", "rb"), supports_streaming=True, caption="Te lo dice el negrito de ojos claros")
 
 
 def nojoda(update, context):
@@ -820,85 +705,84 @@ def nojoda(update, context):
                                    caption="Que viva, @" + reply_user.from_user["username"] + "(" + reply_user.from_user["first_name"] + "), nojoda!")
 
 
-def mimido(update, context):
-    file = random.choice(os.listdir("media/mimido"))
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(
-        "./media/mimido/"+file, "rb"), caption="Zzzzzzzzzzzz")
-
-
-def caro(update, context):
-    video = open("./media/ta_caro.mp4", "rb")
-    context.bot.send_video(chat_id=update.effective_chat.id,
-                           video=video, supports_streaming=True)
-
-
-def llorar(update, context):
-    video = open("./media/llorar.mp4", "rb")
-    context.bot.send_video(chat_id=update.effective_chat.id,
-                           video=video, supports_streaming=True)
-
-
 commands: List[Command] = [
     Command("doggo", "Foto random de un doggo", doggo),
     Command("neko", "Foto random de un neko", neko),
     Command("hentai", "NSFW ;)", hentai),
-    Command("dollar", "Every dollar spent on...", dollar),
-    Command("oilo", "Oílo", oilo),
+    Command("dollar", "Every dollar spent on...",
+            send_photo_from_url(nekos.img('gecg'))),
+    Command("oilo", "Oílo", send_photo_from_url(nekos.img('smug'))),
     Command("pat", "uwu", pat),
     Command("baka", "Baka >_<", baka),
-    Command("hey", "Hey, loc, qué pasa valemía", hey),
+    Command("hey", "Hey, loco, qué pasa valemía", send_video("Hey.mp4")),
     Command("navidad", "la navidad es todo aquello", navidad),
-    Command("quien", "Quién mondá es Dorian?", quien),
-    Command("buenosdias", "Ohayo, darin (Chayanne)", buenosdias),
-    Command("buenasnoches", "Piolín te desea buenas noches", buenasnoches),
-    Command("princesas", "Comando especial para Valeria", princesas),
-    Command("noticias", "Noticias icónicas de Colombia", noticias),
+    Command("quien", "Quién mondá es Dorian?",
+            send_video("Quien.mp4", message="Quién?")),
+    Command("buenosdias", "Ohayo, darin (Chayanne)", choose_photo('chayanne')),
+    Command("buenasnoches", "Piolín te desea buenas noches",
+            choose_photo('buenas_noches')),
+    Command("princesas", "Comando especial para Valeria",
+            send_video("Princesas.mp4")),
+    Command("noticias", "Noticias icónicas de Colombia",
+            choose_photo("noticias")),
     Command("despegala", "Despégala, cachón", despegala),
     Command("metienesque", "Me tienes que sopletear...", butifarra),
     Command("comedia", "Donco media", comedia),
-    Command("mimir", "Hora de mimir", mimir),
-    Command("die", "I just wanna die", die),
+    Command("mimir", "Hora de mimir", send_video(
+        "Mimir.mp4", "Hora de mimir! uwu")),
+    Command("die", "I just wanna die", send_video(
+        "Die.mp4", "Solo quiero morir :(")),
     Command("uypah", "Uy, pah, lo dijiteeeeeeeee", trece),
     Command("respete", "No, señor, respete", respete),
-    Command("escribebien", "Escribe bien, cachón", escribe_bien),
-    Command("no", "No", no),
-    Command("si", "Sí", si),
+    Command("escribebien", "Escribe bien, cachón", send_video(
+        "EscribeBien.mp4", "Escribe bien, cachón")),
+    Command("no", "No", choose_photo("no")),
+    Command("si", "Sí", choose_photo("yes")),
     Command("simp", "SIMP", simp),
-    Command("ayno", "Ay, no, eso sí jamás", ayno),
-    Command("bye", "La despego", bye),
-    Command("perro", "Perro con perro", perro),
+    Command("ayno", "Ay, no, eso sí jamás", send_video("Ayno.mp4")),
+    Command("bye", "La despego", send_video(
+        "Bye.mp4", "La despego, chao, cachones")),
+    Command("perro", "Perro con perro", send_video(
+        "Perro.mp4", "Perro con perro, perro con perro")),
     Command("cagaste", "Cagaste, master", cagaste),
     Command("fino", "Fino, mi rey", fino),
     Command("re", "REEEEEEEEEEEEEEEEEEEEE", re_scream),
     Command("abueno", "Te me cuidas, crack", abueno),
     Command("callese", "Me tiene jodidamente mamado", callese),
-    Command("horny", "Estoy horny", horny),
-    Command("meto", "Hijuputa, tetra hijueputa", meto),
-    Command("rico", "Rico hpta", rico),
-    Command("kya", "Kya~", kya),
+    Command("horny", "Estoy horny", choose_video("horny", "Estoy horny.")),
+    Command("meto", "Hijuputa, tetra hijueputa", send_video(
+        "Meto.mp4", "A ti también te la meto")),
+    Command("rico", "Rico hpta", choose_video("rico", "Rico hpta")),
+    Command("kya", "Kya~", send_video("Kya.mp4", "Kya~")),
     Command("dato", "Qué buen dato, crack", dato),
-    Command("antojaron", "Ya antojaron", antojaron),
-    Command("chirrete", "Me viste cara de chirrete?", chirrete),
+    Command("antojaron", "Ya antojaron",
+            choose_video("antojaron", "Ya antojaron")),
+    Command("chirrete", "Me viste cara de chirrete?",
+            send_video("Chirrete.mp4")),
     Command("decepcion", "Qué decepción", decepcion),
     Command("tragatela", "Bueno, trágatela", tragatela),
     Command("sapo", "Cule sapo", sapo),
-    Command("hya", "#HYAPOSTING", hya),
+    Command("hya", "#HYAPOSTING", send_video(
+        "Hya.mp4", "#HYYYYYAAAAAAA_POSTING")),
     Command("marica", "MARICAAAAA", marica),
-    Command("chad", "Can you feel my heart", chad),
+    Command("chad", "Can you feel my heart", send_video("Chad.mp4")),
     Command("risa", "Cule risa", risa),
     Command("come", "Vaya a come mondá", come),
     Command("siono", "Sí o no", siono),
     Command("foxy", "Cute foxy", foxy),
     Command("qk", "Mi qk pa usté", qk),
-    Command("felicidades", "Evangelion te felicita", felicidades),
-    Command("this", "Filthy Frank", this),
+    Command("felicidades", "Evangelion te felicita",
+            send_video("Felicidades.mp4")),
+    Command("this", "Filthy Frank", send_video("This.mp4")),
     Command("cringe", "Oh no, cringe", cringe),
-    Command("mister", "El chico lindo del corbatín", mister),
+    Command("mister", "El chico lindo del corbatín", send_video("Mister.mp4")),
     Command("seso", "Yo no sé de eso, háblame de seso mejor", seso),
-    Command("tiktok", "El negrito de ojos claros", tiktok),
+    Command("tiktok", "El negrito de ojos claros", send_video("Tiktok.mp4")),
     Command("nojoda", "Que vivan los mongólicos, nojoda!", nojoda),
-    Command("mimido", "Mimido zzzzz", mimido),
-    Command("llorar", "Deja de llorar, maldita puta", llorar),
-    Command("caro", "Ta caro", caro),
+    Command("mimido", "Mimido zzzzz", choose_video(
+        "mimido", caption="Zzzzzzzzzzzz")),
+    Command("llorar", "Deja de llorar, maldita puta",
+            send_video("llorar.mp4")),
+    Command("caro", "Ta caro", send_video("ta_caro.mp4")),
 
 ]
