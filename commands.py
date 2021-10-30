@@ -53,7 +53,7 @@ def choose_photo(folder: str, message=None):
         if message != None:
             context.bot.send_message(
                 chat_id=update.effective_chat.id, text=message)
-        filename = random.choice(os.listdir("./media/{folder}"))
+        filename = random.choice(os.listdir(f"./media/{folder}"))
         context.bot.send_photo(
             chat_id=update.effective_chat.id,
             photo=open(f"./media/{folder}/{filename}", "rb"),
@@ -69,7 +69,7 @@ def choose_video(folder: str, message=None, caption=None):
                 chat_id=update.effective_chat.id,
                 message=message
             )
-        filename = random.choice(os.listdir("./media/{folder}"))
+        filename = random.choice(os.listdir(f"./media/{folder}"))
         context.bot.send_video(
             chat_id=update.effective_chat.id,
             video=open(f"./media/{folder}/{filename}", "rb"),
@@ -140,7 +140,7 @@ def reply_with(message: str, function: Callable[[Update, CallbackContext], None]
                 to = reply_user.from_user["first_name"]
             else:
                 to = f"{reply_user.from_user['first_name']} (@{reply_user.from_user['username']})"
-        msg.replace("[to]", to)
+        msg = msg.replace("[to]", to)
         if msg != "":
             context.bot.send_message(
                 chat_id=update.effective_chat.id, text=msg)
